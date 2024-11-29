@@ -14,7 +14,6 @@ const int INF=1e9;
 const int N=1e5+1;
 vector<pair<int,int>>Adj_list[N];
 
-int visited[N];
 vector<int>Distance(N,INF);
 
 void Dijkstra(int source)
@@ -52,7 +51,6 @@ int main()
         Adj_list[u].push_back(make_pair(v,w));
         Adj_list[v].push_back(make_pair(u,w));
     }
-    memset(visited,-1,sizeof(visited));
     int source=1;
     Dijkstra(source);
     for(int i=1; i<=Node; i++)
