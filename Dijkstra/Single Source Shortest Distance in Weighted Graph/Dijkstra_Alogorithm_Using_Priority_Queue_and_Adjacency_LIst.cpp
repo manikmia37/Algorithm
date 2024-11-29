@@ -14,6 +14,7 @@ const int INF=1e9;
 const int N=1e5+1;
 vector<pair<int,int>>Adj_list[N];
 
+int visited[N];
 vector<int>Distance(N,INF);
 
 void Dijkstra(int source)
@@ -26,6 +27,11 @@ void Dijkstra(int source)
         int head=pq.top().second;
         //int cost=pq.top().first;
         pq.pop();
+        if(visited[head]==1)
+        {
+            continue;
+        }
+        visited[head]=1;
         for(auto Adjacent_Pair:Adj_list[head])
         {
             int adj_node=Adjacent_Pair.first;
@@ -35,6 +41,7 @@ void Dijkstra(int source)
                 Distance[adj_node]=Distance[head]+weight;
                 pq.push(make_pair(Distance[adj_node],adj_node));
             }
+
         }
     }
 }
@@ -51,6 +58,7 @@ int main()
         Adj_list[u].push_back(make_pair(v,w));
         Adj_list[v].push_back(make_pair(u,w));
     }
+    memset(visited,-1,sizeof(visited));
     int source=1;
     Dijkstra(source);
     for(int i=1; i<=Node; i++)
