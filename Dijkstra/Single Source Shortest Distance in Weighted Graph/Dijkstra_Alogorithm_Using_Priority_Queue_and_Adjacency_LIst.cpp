@@ -19,28 +19,25 @@ vector<int>Distance(N,INF);
 
 void Dijkstra(int source)
 {
-   priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
-   pq.push(make_pair(0,source));
-   Distance[source]=0;
-   while(!pq.empty())
-   {
-       int head=pq.top().second;
-       //int cost=pq.top().first;
-       pq.pop();
-       for(auto Adjacent_Pair:Adj_list[head])
-       {
-           int adj_node=Adjacent_Pair.first;
-           int weight=Adjacent_Pair.second;
-           if(adj_node != -1)
-           {
-               if(Distance[head]+weight<Distance[adj_node])
-               {
-                  Distance[adj_node]=Distance[head]+weight;
-                  pq.push(make_pair(Distance[adj_node],adj_node));
-               }
-           }
-       }
-   }
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
+    pq.push(make_pair(0,source));
+    Distance[source]=0;
+    while(!pq.empty())
+    {
+        int head=pq.top().second;
+        //int cost=pq.top().first;
+        pq.pop();
+        for(auto Adjacent_Pair:Adj_list[head])
+        {
+            int adj_node=Adjacent_Pair.first;
+            int weight=Adjacent_Pair.second;
+            if(Distance[head]+weight<Distance[adj_node])
+            {
+                Distance[adj_node]=Distance[head]+weight;
+                pq.push(make_pair(Distance[adj_node],adj_node));
+            }
+        }
+    }
 }
 
 int main()
